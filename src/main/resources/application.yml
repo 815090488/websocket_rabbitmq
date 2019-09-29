@@ -1,0 +1,43 @@
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/websockettest?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /vhost_user
+    username: user
+    password: 123
+    publisher-confirms: true
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+      direct:
+        retry:
+          enabled: true
+          max-attempts: 5
+
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.websocket.springboot.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+
+
+logging:
+  level:
+    io:
+      swagger:
+        models:
+          parameters:
+            AbstractSerializableParameter: error
+server:
+  port: 8085
